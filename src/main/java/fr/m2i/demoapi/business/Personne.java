@@ -1,4 +1,4 @@
-package fr.m2i.demoapii.business;
+package fr.m2i.demoapi.business;
 
 public class Personne {
 

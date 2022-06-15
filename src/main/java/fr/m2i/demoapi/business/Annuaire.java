@@ -1,4 +1,4 @@
-package fr.m2i.demoapii.business;
+package fr.m2i.demoapi.business;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -9,10 +9,11 @@ public class Annuaire {
     private long nextId = 1;
     
 
-    public void addPersonne(Personne newPersonne){
+    public Personne addPersonne(Personne newPersonne){
         newPersonne.setId(nextId);
         nextId++;
         personnes.add(newPersonne);
+        return newPersonne;
     }
     
     public Optional<Personne> getPersonne(long id){
