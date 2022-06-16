@@ -1,6 +1,7 @@
 package fr.m2i.demoapi.business;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 public class Annuaire {
@@ -26,25 +27,39 @@ public class Annuaire {
     }
     
     public void updatePersonne(Personne personne){
-        for (Personne p : personnes) {
+        Iterator<Personne> it = personnes.iterator();
+        int index = 0;
+        while (it.hasNext() && index == 0) {
+            Personne p = it .next();
             if (p.getId().equals(personne.getId())){
-                personnes.remove(p);
-                personnes.add(personne);
-    
+                index = personnes.indexOf(p);
+            }
+        }
+        personnes.set(index, personne);
+
+//    solution qui fait une erreur 500 car clause de concurrence avec boucle annuaire update        
+//        for (Personne p : personnes) {
+//            if (p.getId().equals(personne.getId())){
+//                personnes.remove(p);
+//                personnes.add(personne);
+
+
 //       solution 2  moins energivore du remove
 //                int index = personnes.indexOf(personne);
 //                personnes.set(index, personne);
-            }
-        }
      }
 
-    public void deletePersonne(Personne personne){
-        for (Personne p : personnes) {
-            if (p.getId().equals(personne.getId())){
-                personnes.remove(p);
+   public void deletePersonne(long id) {
+        Iterator<Personne> it = personnes.iterator();
+        int index = 0;
+        while (it.hasNext() && index == 0) {
+            Personne p = it.next();
+            if (p.getId().equals(id)) {
+                index = personnes.indexOf(p);
             }
         }
-     }
+        personnes.remove(index);
+    }
         
     public ArrayList<Personne> getPersonnes() {
         return personnes;
